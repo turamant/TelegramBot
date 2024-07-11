@@ -27,6 +27,15 @@ logging.basicConfig(
 BATCH_SIZE = 20
 
 def parse_datetime(dt_str: str) -> datetime:
+    """
+    Парсит строку даты и времени в формате ISO 8601 (YYYY-MM-DDThh:mm:ss) и возвращает объект datetime.
+    Args:
+        dt_str (str): Строка даты и времени в формате ISO 8601.
+    Returns:
+        datetime: Объект datetime, соответствующий входной строке.
+    Raises:
+        ValueError: Если входная строка имеет неверный формат.
+    """
     match = re.match(r"(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})", dt_str)
     if match:
         return datetime(
@@ -38,9 +47,20 @@ def parse_datetime(dt_str: str) -> datetime:
             int(match.group(6))
         )
     else:
-        raise ValueError(f"Invalid datetime string: {dt_str}")
+        raise ValueError(f"Неверная строка даты и времени: {dt_str}")
 
 async def aggregate_data(dt_from: str, dt_upto: str, group_type: str) -> Dict[str, List[float]]:
+     """
+    Агрегирует данные из коллекции MongoDB в заданном диапазоне дат и времени, группируя их по часам, дням или месяцам.
+    Args:
+        dt_from (str): Начальная дата и время в формате ISO 8601.
+        dt_upto (str): Конечная дата и время в формате ISO 8601.
+        group_type (str): Тип группировки: "hour", "day" или "month".
+    Returns:
+        Dict[str, List[float]]: Словарь с ключами "labels" и "dataset", содержащий метки и агрегированные данные соответственно.
+    Raises:
+        Exception: Если возникает ошибка при агрегации данных.
+    """
     try:
         dt_from_dt = parse_datetime(dt_from)
         dt_upto_dt = parse_datetime(dt_upto)
@@ -83,5 +103,5 @@ async def aggregate_data(dt_from: str, dt_upto: str, group_type: str) -> Dict[st
         }
         return chart_data
     except Exception as e:
-        logging.error(f"Error in aggregate_data: {e}")
+        logging.error(f"Ошибка аггрегации данных: {e}")
         raise
