@@ -13,11 +13,11 @@ load_dotenv()
 TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 MONGODB_URI = f"mongodb://{os.getenv('MONGO_HOST')}:{os.getenv('MONGO_PORT')}/{os.getenv('MONGO_DB')}"
 
-# All handlers should be attached to the Router (or Dispatcher)
+
 dp = Dispatcher()
 
 client = AsyncIOMotorClient(MONGODB_URI)
-db = client[f"{os.getenv('MONGO_DB')}"]
+db = client['sampleDB']
 collection = db['sample_collection']
 
 async def main() -> None:

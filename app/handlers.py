@@ -1,9 +1,11 @@
 import logging
 import json
 from typing import Dict, List, Any
+
 from aiogram.types import Message
 from aiogram.filters import CommandStart, Command
 from aiogram.utils.markdown import bold
+
 from app.aggregator import aggregate_data
 
 async def command_start_handler(message: Message) -> None:

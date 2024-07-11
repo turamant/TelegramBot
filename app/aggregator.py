@@ -3,6 +3,7 @@ import logging
 import re
 from datetime import datetime
 from typing import Dict, List
+
 from dotenv import load_dotenv
 from motor.motor_asyncio import AsyncIOMotorClient
 
@@ -11,7 +12,7 @@ load_dotenv()
 MONGODB_URI = f"mongodb://{os.getenv('MONGO_HOST')}:{os.getenv('MONGO_PORT')}/{os.getenv('MONGO_DB')}"
 
 client = AsyncIOMotorClient(MONGODB_URI)
-db = client[f"{os.getenv('MONGO_DB')}"]
+db = client['sampleDB']
 collection = db['sample_collection']
 
 logging.basicConfig(
