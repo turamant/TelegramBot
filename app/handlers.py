@@ -8,7 +8,7 @@ from app.aggregator import aggregate_data
 
 
 async def command_start_handler(message: Message) -> None:
-    """
+    """`
     Обработчик команды /start.
     Отправляет приветственное сообщение с инструкцией по использованию команды /aggregate.
     Args:
@@ -24,10 +24,10 @@ async def command_start_handler(message: Message) -> None:
                          "  \"group_type\": \"month\"\n"
                          "}\n"
                          "```")
-                         
+
 
 async def aggregate_handler(message: Message) -> None:
-     """
+    """
     Обработчик команды /aggregate.
     Принимает JSON-сообщение с параметрами для агрегации данных, вызывает функцию aggregate_data
     и отправляет результат в виде сообщения.

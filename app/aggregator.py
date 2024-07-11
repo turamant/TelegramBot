@@ -50,7 +50,7 @@ def parse_datetime(dt_str: str) -> datetime:
         raise ValueError(f"Неверная строка даты и времени: {dt_str}")
 
 async def aggregate_data(dt_from: str, dt_upto: str, group_type: str) -> Dict[str, List[float]]:
-     """
+    """
     Агрегирует данные из коллекции MongoDB в заданном диапазоне дат и времени, группируя их по часам, дням или месяцам.
     Args:
         dt_from (str): Начальная дата и время в формате ISO 8601.
